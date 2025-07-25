@@ -3,12 +3,12 @@
 
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
-import { success } from "zod";
+
 
 export const registerUser = async(userData: FieldValues)=>{
     try{
      
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/register`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/register`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -29,7 +29,7 @@ export const registerUser = async(userData: FieldValues)=>{
 //login 
 export const loginUser = async(userData: FieldValues)=>{
     try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/login`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/login`,{
         method:"POST",
         headers:{
             "Content-Type":"application/json",
@@ -61,7 +61,7 @@ export const getProfile = async()=>{
         if(!accessToken){
             return {success: false, message: "No token found"}
         }
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/profile`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/profile`,{
             method:"GET",
             headers:{
                 "Content-Type":"application/json",
