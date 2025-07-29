@@ -77,8 +77,21 @@ export const updateEvent = async (eventId: number, eventData: any) => {
       body: JSON.stringify(eventData),
     });
 
-    const data = await res.json();
-    if (!res.ok) return { success: false, message: data.message || "Failed to update event" };
+    const contentType = res.headers.get("content-type") || "";
+    let data;
+
+    if (contentType.includes("application/json")) {
+      data = await res.json();
+    } else {
+      // If not JSON, read as plain text
+      const text = await res.text();
+      data = { message: text };
+    }
+
+    if (!res.ok) {
+      return { success: false, message: data.message || "Failed to update event" };
+    }
+
     return { success: true, data, message: "Event updated successfully" };
   } catch (error: any) {
     console.error("Update Event Error:", error);
