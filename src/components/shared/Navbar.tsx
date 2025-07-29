@@ -39,7 +39,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/events", label: "All Events" },
-    { href: "/create-event", label: "Create Event" },
+    { href: "/my-events", label: "My Created Events" },
   ];
 
   useEffect(() => {
